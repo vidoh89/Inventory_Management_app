@@ -31,14 +31,18 @@ import colors from "tailwindcss/colors";
     "800":"100",
     "900":"50",
   };
+  
   /**
    * generateThemeObject()
    */
 const generateThemeObject = (colors:any, mapping:any, invert = false) =>{
   const theme: any = {};
-
+  
   baseColor.forEach((color)=>{
+  //create an object for each color  
   theme[color] = {};
+  //
+
   Object.entries(mapping).forEach(([key,value]:any)=>{
     const shadeKey = invert ? value: key;
     theme[color][key] = colors[color][shadeKey];
@@ -48,8 +52,23 @@ const generateThemeObject = (colors:any, mapping:any, invert = false) =>{
 }
 // lightTheme
 const lightTheme = generateThemeObject(colors,shadeMapping);
+// darkTheme
 const darkTheme = generateThemeObject(colors,shadeMapping,true);
+// Add additional colors to themes
+const themes ={
+  light: {
+    ...lightTheme,
+    white: "#ffffff"
+  },
+  dark: {
+    ...darkTheme,
+    white: colors.gray["950"],
+    black: colors.gray["50"]
+  }
+}
 const config: Config = {
+  // Set darkMode  
+  darkTheme: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -64,6 +83,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [createThemes(themes)],
 };
 export default config;
