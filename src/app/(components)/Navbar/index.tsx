@@ -1,5 +1,5 @@
 "use client";
-import { Menu, Bell, Sun, Moon } from "lucide-react";
+import { Menu, Bell, Sun, Moon, Settings } from "lucide-react";
 import Image from "next/image";
 // import {useAppDispatch, useAppSelector} from "@/app/redux";
 import Link from "next/link";
@@ -52,9 +52,12 @@ const Navbar = () => {
             height={50}
             className="rounded-full h-full object-cover"
             />
-            <span className="font-semibold">Ed Roh</span>
+            <span className="font-semibold">Vince Dority</span>
           </div>
         </div>
+        <Link href="/settings">
+        <Settings className="cursor-pointer text-gray-500" size={24}/>
+        </Link>
       </div>
     </div>
   );
